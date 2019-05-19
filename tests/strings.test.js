@@ -36,7 +36,7 @@ describe('/strings', () => {
   });
 
   describe('GET /lower/{string}', () => {
-    xit('returns the lowercased string', (done) => {
+    it('returns the lowercased string', (done) => {
       chai.request(server)
         .get('/strings/lower/HELLO')
         .end((err, res) => {
@@ -49,7 +49,7 @@ describe('/strings', () => {
   });
 
   describe('GET /first-characters/{string}', () => {
-    xit('returns the first character of the string when there is no query string', (done) => {
+    it('returns the first character of the string when there is no query string', (done) => {
       chai.request(server)
         .get('/strings/first-characters/hello')
         .end((err, res) => {
