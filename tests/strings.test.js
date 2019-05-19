@@ -10,10 +10,20 @@ describe('/strings', () => {
           done();
         });
     });
+    it('returns "Hello turtle!" when passed "turtle"', (done) => {
+      chai.request(server)
+        .get('/strings/hello/turtle')
+        .end((err, res) => {
+          expect(err).to.equal(null);
+          expect(res.status).to.equal(200);
+          expect(res.body).to.eql({ result: 'Hello turtle!' });
+          done();
+        });
+    });
   });
 
   describe('GET /upper/{string}', () => {
-    xit('returns the uppercased string', (done) => {
+    it('returns the uppercased string', (done) => {
       chai.request(server)
         .get('/strings/upper/hello')
         .end((err, res) => {
