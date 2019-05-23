@@ -86,6 +86,7 @@ describe('/numbers', () => {
         .post('/numbers/multiply')
         .send({ a: 10, b: 3 })
         .end((err, res) => {
+          console.log(err);
           expect(err).to.equal(null);
           expect(res.status).to.equal(200);
           expect(res.body).to.eql({ result: 30 });
@@ -93,7 +94,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('multiplies stringified numbers', (done) => {
+    it('multiplies stringified numbers', (done) => {
       chai.request(server)
         .post('/numbers/multiply')
         .send({ a: '-4', b: '-9' })
@@ -105,7 +106,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if a parameter is missing', (done) => {
+    it('errors if a parameter is missing', (done) => {
       chai.request(server)
         .post('/numbers/multiply')
         .send({ a: 'fish' })
@@ -117,7 +118,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if the parameters are not numbers', (done) => {
+    it('errors if the parameters are not numbers', (done) => {
       chai.request(server)
         .post('/numbers/multiply')
         .send({ a: 'fish', b: 'chips' })

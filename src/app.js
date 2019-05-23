@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 const {
   sayHello,
   uppercase,
@@ -64,8 +66,15 @@ app.get('/numbers/subtract/:b/from/:a', (req, res) => {
   }
 });
 
-app.post('/numbers/multiply', (req, res) => {
-  res.status(200).json({ result: multiply(req.body.a, req.body.b) });
+app.post('/numbers/multiply/', (req, res) => {
+  const { a, b } = req.body;
+  if (a === undefined || b === undefined) {
+    res.status(400).json({ error: 'Parameters \"a\" and \"b\" are required.' });
+  } else if (isNaN(a) || isNaN(b)) {
+    res.status(400).json({ error: 'Parameters \"a\" and \"b\" must be valid numbers.' });
+  } else {
+    res.status(200).json({ result: multiply(a, b) });
+  }
 });
 
 module.exports = app;
